@@ -1,0 +1,98 @@
+{
+  "project": "Yang & Wang 2027 wedding invitation — standalone export",
+  "createdAt": "2026-10-18T12:29:25.616304+00:00",
+  "sourceVersion": 15,
+  "sourceCommit": "48dd12f90d0c58d96a830b3fde3248409a82eae5",
+  "entrypoint": "index.html",
+  "countdownTarget": "2027-01-09T17:08:00+08:00",
+  "audio": {
+    "file": "assets/audio/yujunshu.m4a",
+    "sourceTrimStartSeconds": 32,
+    "durationSeconds": 171.057007,
+    "codec": "AAC",
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "files": [
+    {
+      "path": "README-部署说明.md",
+      "bytes": 12110,
+      "sha256": "ba1d282d2329e30157490c5ffbab9673595b23e93435dcfabd7b731337688f54"
+    },
+    {
+      "path": "assets/audio/yujunshu.m4a",
+      "bytes": 4211754,
+      "sha256": "9f0d92a908d8a4c12060c4b0e80b4f6c5945a9476ad5f59f745a5602c87a9139"
+    },
+    {
+      "path": "assets/images/couple.jpg",
+      "bytes": 690808,
+      "sha256": "d9b911661f0afc0b1738dc6a5dc799b43cb06b312fb4a2475004bfc1b4bdaa81"
+    },
+    {
+      "path": "assets/images/invitation-cover.png",
+      "bytes": 3831551,
+      "sha256": "709d4a4b156fa5377767af9c361084c75b4064d1174f8a0b651bbff143e123f4"
+    },
+    {
+      "path": "assets/images/share-cover.jpg",
+      "bytes": 18420,
+      "sha256": "519847d30a03236b0e3b61b05a1f0ac403e9b0c580f1719e3559d3d2af2c36b7"
+    },
+    {
+      "path": "css/styles.css",
+      "bytes": 8648,
+      "sha256": "9add265e390c70defd7785e76e9a6f1b41e7f017c32a816e200e05d5a4b2da0d"
+    },
+    {
+      "path": "docs/验证记录.md",
+      "bytes": 4153,
+      "sha256": "a6684e142c92f5bfd40b83245166a70cca8722c5de55f4148d7fa00d92e22ea5"
+    },
+    {
+      "path": "index.html",
+      "bytes": 6087,
+      "sha256": "38668bf1b70e81fd19c108f03a7981798a5da04a78cd0e3bc162e9fa4ca5fe21"
+    },
+    {
+      "path": "js/app.js",
+      "bytes": 8703,
+      "sha256": "64024deffa856e3ba62bde4192406ae178759f7ab9727d2c646b62ee3b155451"
+    },
+    {
+      "path": "js/config.js",
+      "bytes": 388,
+      "sha256": "e77da28f44c83e390f319d9406f53387daf345ccfdb001f185383e2249cd8366"
+    },
+    {
+      "path": "tools/check_interactions.cjs",
+      "bytes": 11472,
+      "sha256": "0ede4fcec377c5b0764d9ecc44e8cbe91856a318c209cc3b1b8edcccc0706e22"
+    },
+    {
+      "path": "tools/check_static.py",
+      "bytes": 5182,
+      "sha256": "fe86d3435888dd65c905fbc31c2ed59426b5cf9df3d6341d8b883640f90ee78c"
+    },
+    {
+      "path": "tools/configure-share.html",
+      "bytes": 4239,
+      "sha256": "7168fae64236ae0d2b4f2909c522a5d1300e644ea467947d317b6343891b5502"
+    },
+    {
+      "path": "tools/set_site_url.py",
+      "bytes": 1928,
+      "sha256": "e8bf6a458e65bde04f29ba0e8a8a1d1727fee3aa8c3ad5e18cb29eb556a8dd36"
+    },
+    {
+      "path": "wedding.ics",
+      "bytes": 416,
+      "sha256": "71a9dde124b8f0cdf7dab6d5cf081b029ed03877be56c76a56cda1e6ffe60663"
+    },
+    {
+      "path": "开始使用.html",
+      "bytes": 4120,
+      "sha256": "aea89fc8f23a7c57a94e8499da5fdda3a73e5514e7c8eecf0d5077e62bb6e9c9"
+    }
+  ]
+}

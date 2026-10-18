@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设置婚礼请柬分享网址</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 20px; background: #edf1f3; color: #263c49; font: 16px/1.8 system-ui,sans-serif; }
+    main { max-width: 660px; margin: auto; background: white; padding: 32px; border-radius: 16px; }
+    h1 { font-size: 24px; margin-top: 0; }
+    label { display: block; margin: 22px 0 8px; font-weight: 600; }
+    input { width: 100%; padding: 12px; font: inherit; border: 1px solid #adbdc8; border-radius: 6px; }
+    button { margin-top: 26px; padding: 12px 20px; background: #6b252b; color: white; border: 0; border-radius: 6px; font: inherit; cursor: pointer; }
+    small { display: block; color: #536775; }
+    #status { white-space: pre-line; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>设置请柬的分享网址与封面</h1>
+  <p>先取得最终部署网址，再用这个工具生成更新后的首页。所有处理都在当前浏览器内完成。</p>
+  <form id="form">
+    <label for="file">1. 选择解压文件夹中的 index.html</label>
+    <input id="file" type="file" accept=".html,text/html" required>
+    <label for="site">2. 输入网站最终网址</label>
+    <input id="site" type="url" placeholder="https://你的域名.cn/" required>
+    <small>子目录也可以，例如 https://example.com/wedding/。不要带 index.html、?参数或 #片段。</small>
+    <button type="submit">生成配置后的 index.html</button>
+  </form>
+  <p id="status" role="status"></p>
+  <p>下载后，用新文件替换原文件夹中的 index.html，再把整套文件重新上传。婚纱照、音乐与页面内容不会改变。</p>
+</main>
+<script>
+"use strict";
+function configureShare(html, rawUrl) {
+  var url = new URL(rawUrl.trim());
+  if (!/^https?:$/.test(url.protocol) || !url.hostname || url.username || url.password || url.search || url.hash) {
+    throw new Error("请输入完整的 http(s) 网址，不要带登录信息、?参数或 #片段。");
+  }
+  if (/\.html?$/i.test(url.pathname)) {
+    throw new Error("请输入网站文件夹的网址，不要附加 index.html。");
+  }
+  url.pathname = url.pathname.replace(/\/+$/, "") + "/";
+  var page = url.href;
+  var image = new URL("assets/images/share-cover.jpg", page).href;
+  var fields = [
+    [/(<meta property="og:url" content=")[^"]*(")/g, page],
+    [/(<meta property="og:image" content=")[^"]*(")/g, image],
+    [/(<meta name="twitter:image" content=")[^"]*(")/g, image],
+    [/(<link rel="image_src" href=")[^"]*(")/g, image],
+    [/(<link rel="canonical" href=")[^"]*(")/g, page],
+  ];
+  fields.forEach(function (field) {
+    var count = 0;
+    var escaped = field[1].replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    html = html.replace(field[0], function (_, before, after) { count++; return before + escaped + after; });
+    if (count !== 1) { throw new Error("所选文件缺少请柬分享标签，请选择本文件夹中的 index.html。"); }
+  });
+  return { html: html, page: page };
+}
+document.getElementById("form").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  var status = document.getElementById("status");
+  try {
+    var file = document.getElementById("file").files[0];
+    if (!file) { throw new Error("请先选择 index.html。"); }
+    var result = configureShare(await file.text(), document.getElementById("site").value);
+    var download = document.createElement("a");
+    var blobUrl = URL.createObjectURL(new Blob([result.html], { type: "text/html;charset=utf-8" }));
+    download.href = blobUrl;
+    download.download = "index.html";
+    document.body.appendChild(download);
+    download.click();
+    download.remove();
+    setTimeout(function () { URL.revokeObjectURL(blobUrl); }, 30000);
+    status.textContent = "已生成首页，分享网址：" + result.page + "\n请用下载文件替换原 index.html，然后重新上传。若文件名带有 (1)，请改回 index.html。";
+  } catch (error) { status.textContent = "配置未完成：" + error.message; }
+});
+</script>
+</body>
+</html>
